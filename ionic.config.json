@@ -1,5 +1,7 @@
 {
   "name": "eWallet-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

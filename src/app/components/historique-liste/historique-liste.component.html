@@ -1,0 +1,14 @@
+<ion-title text-center>Historique</ion-title>
+<ion-virtual-scroll [items]="items">
+  <ion-card *virtualItem="let item">
+    <ion-item lines="none">
+      <ion-icon [name]="item.icon" slot="start"></ion-icon>
+      <ion-card-title>{{ item.name }}</ion-card-title>
+    </ion-item>
+
+    <ion-item lines="none"
+      ><ion-label text-center>Amount : $ {{ item.amount }}</ion-label>
+      <ion-label>Date : {{ item.date | date: "yyyy-MM-dd" }}</ion-label>
+    </ion-item>
+  </ion-card>
+</ion-virtual-scroll>
