@@ -1,0 +1,61 @@
+<ion-content *ngIf="!isList">
+  <ion-list lines="none">
+    <ion-list-header>Choose Category</ion-list-header>
+    <ion-item button *ngFor="let categ of categories">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-icon size="large" [name]="categ.icon"></ion-icon>
+          </ion-col>
+          <ion-col size="7" class="ion-text-center">
+            {{ categ.name }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="DismissClick()">Close</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" (click)="isList = true">Add New</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-content padding *ngIf="isList">
+  <ion-grid *ngFor="let icon of ioniconsList; index as i">
+    <ion-row *ngIf="i % 4 === 0">
+      <ion-col
+        size="3"
+        *ngIf="i < ioniconsList.length"
+        (click)="clicked(ioniconsList[i])"
+      >
+        <ion-icon size="large" [name]="ioniconsList[i]"></ion-icon>
+      </ion-col>
+      <ion-col
+        size="3"
+        *ngIf="i + 1 < ioniconsList.length"
+        (click)="clicked(ioniconsList[i + 1])"
+      >
+        <ion-icon size="large" [name]="ioniconsList[i + 1]"></ion-icon>
+      </ion-col>
+      <ion-col
+        size="3"
+        *ngIf="i + 2 < ioniconsList.length"
+        (click)="clicked(ioniconsList[i + 2])"
+      >
+        <ion-icon size="large" [name]="ioniconsList[i + 2]"></ion-icon>
+      </ion-col>
+      <ion-col
+        size="3"
+        *ngIf="i + 3 < ioniconsList.length"
+        (click)="clicked(ioniconsList[i + 3])"
+      >
+        <ion-icon size="large" [name]="ioniconsList[i + 3]"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

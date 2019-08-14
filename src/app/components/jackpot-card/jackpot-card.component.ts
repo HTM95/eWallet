@@ -1,5 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AlertController } from "@ionic/angular";
+import { PopoverController } from "@ionic/angular";
+import { IconsListComponent } from "../icons-list/icons-list.component";
+import { IonSelect } from "@ionic/angular";
 
 @Component({
   selector: "app-jackpot-card",
@@ -7,10 +10,15 @@ import { AlertController } from "@ionic/angular";
   styleUrls: ["./jackpot-card.component.scss"]
 })
 export class JackpotCardComponent implements OnInit {
-  constructor(public alertController: AlertController) {}
+  constructor(
+    public alertController: AlertController,
+    public popoverController: PopoverController
+  ) {}
   amount = 400.0;
   exp = 300.0;
   inc = 100.0;
+  currentPopover = null;
+  // @ViewChild("select1") select1: IonSelect;
 
   async addIncomeAlert() {
     const alert = await this.alertController.create({
@@ -44,6 +52,23 @@ export class JackpotCardComponent implements OnInit {
     await alert.present();
   }
 
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: IconsListComponent,
+      event: ev,
+      translucent: true
+    });
+    this.currentPopover = popover;
+    return await popover.present();
+  }
+
+  dismissPopover() {
+    if (this.currentPopover) {
+      this.currentPopover.dismiss().then(() => {
+        this.currentPopover = null;
+      });
+    }
+  }
   async addDepenseAlert() {
     const alert = await this.alertController.create({
       header: "Add Depense",
@@ -85,5 +110,8 @@ export class JackpotCardComponent implements OnInit {
 
     await alert.present();
   }
+  /*openSelect() {
+    this.select1.open();
+  }*/
   ngOnInit() {}
 }

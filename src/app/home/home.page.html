@@ -10,6 +10,8 @@
 </ion-header>
 
 <ion-content>
+  <google-chart [data]="pieChartData" class="center"></google-chart>
   <div class="potdiv"><app-jackpot-card></app-jackpot-card></div>
+  <div style="height: 80px"></div>
   <app-historique-liste></app-historique-liste>
 </ion-content>

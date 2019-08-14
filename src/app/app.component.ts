@@ -17,9 +17,19 @@ export class AppComponent {
       icon: "home"
     },
     {
-      title: "List",
-      url: "/list",
-      icon: "list"
+      title: "Edit profil",
+      url: "/",
+      icon: "create"
+    },
+    {
+      title: "Add Bank card",
+      url: "/",
+      icon: "card"
+    },
+    {
+      title: "Invoice",
+      url: "/",
+      icon: "cash"
     }
   ];
 
