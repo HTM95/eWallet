@@ -9,27 +9,27 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { IconsListComponent } from "./components/icons-list/icons-list.component";
-
-/*import {
-  HammerGestureConfig,
-  HAMMER_GESTURE_CONFIG
-} from "@angular/platform-browser";
-import * as Hammer from "hammerjs";
-
-export class CustomHammerConfig extends HammerGestureConfig {
-  overrides = {
-    pan: {
-      direction: Hammer.DIRECTION_ALL
-    }
-  };
-}*/
+import { ImagePicker } from "@ionic-native/image-picker/ngx";
+import { AccountService } from "./services/account.service";
+import { HistoriqueService } from "./services/historique.service";
+import { ChartsModule } from "ng2-charts";
+import { CardModule } from "ngx-card/ngx-card";
 @NgModule({
   declarations: [AppComponent, IconsListComponent],
   entryComponents: [IconsListComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    ChartsModule,
+    CardModule
+  ],
   providers: [
+    ImagePicker,
     StatusBar,
     SplashScreen,
+    AccountService,
+    HistoriqueService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

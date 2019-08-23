@@ -4,7 +4,46 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>target Page</ion-title>
+    <ion-button slot="end" (click)="addNewTarget()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-card class="card" *ngFor="let item of targets">
+    <img [src]="item.image" style="height:200px" />
+    <ion-card-header>
+      <ion-card-title>
+        {{ item.name }}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid *ngIf="item.actualAmount < item.amount">
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            {{ item.actualAmount }}
+          </ion-col>
+          <ion-col size="8">
+            <ion-progress-bar
+              [value]="item.actualAmount / item.amount"
+            ></ion-progress-bar>
+          </ion-col>
+          <ion-col>
+            {{ item.amount }}
+          </ion-col>
+          <ion-col>
+            <ion-button
+              size="small"
+              (click)="item.actualAmount = item.actualAmount + 10"
+            >
+              <ion-icon name="arrow-round-up"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-label *ngIf="item.actualAmount == item.amount">Succes !!</ion-label>
+      <ion-label solt="end">{{ item.date | date: "yyyy-MM-dd" }}</ion-label>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

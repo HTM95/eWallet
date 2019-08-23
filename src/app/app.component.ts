@@ -18,17 +18,17 @@ export class AppComponent {
     },
     {
       title: "Edit profil",
-      url: "/",
+      url: "edit-profil",
       icon: "create"
     },
     {
       title: "Add Bank card",
-      url: "/",
+      url: "add-card",
       icon: "card"
     },
     {
       title: "Invoice",
-      url: "/",
+      url: "invoices",
       icon: "cash"
     }
   ];

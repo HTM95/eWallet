@@ -13,14 +13,14 @@
       <ion-button (click)="addIncomeAlert()">
         <ion-icon name="add"></ion-icon>
       </ion-button>
-      <ion-label text-center>$ {{ amount }}</ion-label>
+      <ion-label text-center>$ {{ account.actualAmount }}</ion-label>
       <ion-button (click)="presentPopover()">
         <ion-icon name="remove"> </ion-icon
       ></ion-button>
     </ion-item>
     <ion-item lines="none">
-      <ion-label>Income :$ {{ inc }}</ion-label>
-      <ion-label>Expense :$ {{ exp }}</ion-label>
+      <ion-label>Income :$ {{ account.income }}</ion-label>
+      <ion-label>Expense :$ {{ account.expense }}</ion-label>
     </ion-item>
   </ion-card-content>
 </ion-card>

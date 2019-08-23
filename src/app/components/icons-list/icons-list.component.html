@@ -1,14 +1,14 @@
-<ion-content *ngIf="!isList">
+<ion-content *ngIf="showChooseCateg">
   <ion-list lines="none">
     <ion-list-header>Choose Category</ion-list-header>
     <ion-item button *ngFor="let categ of categories">
       <ion-grid>
-        <ion-row class="ion-align-items-center">
+        <ion-row (click)="chooseCateg(categ)" class="ion-align-items-center">
           <ion-col size="4">
             <ion-icon size="large" [name]="categ.icon"></ion-icon>
           </ion-col>
           <ion-col size="7" class="ion-text-center">
-            {{ categ.name }}
+            {{ categ.nomCateg }}
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -20,12 +20,17 @@
         <ion-button expand="block" (click)="DismissClick()">Close</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button expand="block" (click)="isList = true">Add New</ion-button>
+        <ion-button
+          expand="block"
+          (click)="showChooseCateg = false; showNewCateg = true"
+          >Add New</ion-button
+        >
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
-<ion-content padding *ngIf="isList">
+<ion-content padding *ngIf="showNewCateg">
+  <ion-header>Add New Category</ion-header>
   <ion-grid *ngFor="let icon of ioniconsList; index as i">
     <ion-row *ngIf="i % 4 === 0">
       <ion-col
@@ -55,6 +60,57 @@
         (click)="clicked(ioniconsList[i + 3])"
       >
         <ion-icon size="large" [name]="ioniconsList[i + 3]"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="showNewCategName">
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="20%">
+        <ion-icon size="large" [name]="categIcon"></ion-icon>
+      </ion-col>
+      <ion-col size="80%">
+        <ion-input #categName placeholder="Enter Gategory Name"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="DismissClick()">Close</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button
+          expand="block"
+          (click)="addCtegorie(categName.value, categIcon)"
+          >Add</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="showAddExpense">
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="20%">
+        <ion-icon size="large" [name]="choosenCategory.icon"></ion-icon>
+      </ion-col>
+      <ion-col size="80%">
+        <ion-label>{{ choosenCategory.nomCateg }}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-input placeholder="Amount" #expBox></ion-input>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="DismissClick()">Close</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" (click)="expenseAdded(expBox.value)"
+          >Add</ion-button
+        >
       </ion-col>
     </ion-row>
   </ion-grid>

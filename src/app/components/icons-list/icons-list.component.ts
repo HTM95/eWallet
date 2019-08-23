@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { PopoverController } from "@ionic/angular";
+import { AccountService } from "src/app/services/account.service";
+import { Icategory } from "src/app/classes/icategory";
+import { Idepense } from "src/app/classes/idepense";
+import { HistoriqueService } from "src/app/services/historique.service";
+import { Icon } from "ionicons/dist/types/icon/icon";
 
 @Component({
   selector: "app-icons-list",
@@ -9,6 +14,16 @@ import { PopoverController } from "@ionic/angular";
 export class IconsListComponent implements OnInit {
   currentPopover = null;
   isList = false;
+  categIcon = null;
+  showAddCateg = false;
+  showAmount = false;
+
+  showChooseCateg = true;
+  showNewCateg = false;
+  showNewCategName = false;
+  showAddExpense = false;
+
+  choosenCategory: Icategory;
   ioniconsList = [
     "add",
     "add-circle",
@@ -328,41 +343,14 @@ export class IconsListComponent implements OnInit {
     "wine",
     "woman"
   ];
-  constructor(private popoverController: PopoverController) {}
-  categories = [
-    {
-      name: "Food",
-      icon: "restaurant"
-    },
-    {
-      name: "Transport",
-      icon: "car"
-    },
-    {
-      name: "Coffe",
-      icon: "cafe"
-    },
-    {
-      name: "House",
-      icon: "home"
-    },
-    {
-      name: "Health",
-      icon: "medkit"
-    },
-    {
-      name: "Shopping",
-      icon: "cart"
-    },
-    {
-      name: "Phone",
-      icon: "call"
-    },
-    {
-      name: "Gym",
-      icon: "fitness"
-    }
-  ];
+  constructor(
+    private popoverController: PopoverController,
+    private _accountService: AccountService,
+    private _historiqueService: HistoriqueService
+  ) {}
+
+  categories = this._historiqueService.categories;
+
   ngOnInit() {}
   async DismissClick() {
     await this.popoverController.dismiss();
@@ -370,8 +358,38 @@ export class IconsListComponent implements OnInit {
 
   clicked(i) {
     console.log(i);
+    this.showNewCateg = false;
+    this.showNewCategName = true;
+    this.categIcon = i;
   }
-  /* async presentPopover(ev: any) {
+  chooseCateg(categorie: Icategory) {
+    this.choosenCategory = categorie;
+    this.showChooseCateg = false;
+    this.showAddExpense = true;
+  }
+
+  expenseAdded(amount) {
+    let depense = {
+      id: 2,
+      amount: parseInt(amount),
+      categ: this.choosenCategory,
+      date: new Date()
+    };
+    this._accountService.addDep(depense);
+    this.DismissClick();
+  }
+  addCtegorie(categName, categIcon) {
+    let category = {
+      id: 20,
+      nomCateg: categName,
+      icon: categIcon
+    };
+    this._historiqueService.addCateg(category);
+    this.showNewCategName = false;
+    this.showChooseCateg = true;
+  }
+}
+/* async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: IconsListComponent,
       event: ev,
@@ -380,4 +398,3 @@ export class IconsListComponent implements OnInit {
     this.currentPopover = popover;
     return await popover.present();
   }*/
-}

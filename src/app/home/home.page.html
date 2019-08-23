@@ -8,10 +8,15 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-  <google-chart [data]="pieChartData" class="center"></google-chart>
-  <div class="potdiv"><app-jackpot-card></app-jackpot-card></div>
-  <div style="height: 80px"></div>
+<ion-content scroll-y="false">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <!--<google-chart [data]="pieChartData"></google-chart>-->
+        <app-doughnut></app-doughnut>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-jackpot-card></app-jackpot-card>
   <app-historique-liste></app-historique-liste>
 </ion-content>

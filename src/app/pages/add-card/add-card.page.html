@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>addCard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-slides [options]="sliderConfig">
+    <ion-slide *ngFor="let item of items">
+      <ion-card class="card"> </ion-card>
+    </ion-slide>
+  </ion-slides>-->
+  <div class="card-container"></div>
+  <form
+    #cardForm="ngForm"
+    card
+    container=".card-container"
+    card-width="200"
+    messages="messages"
+    placeholders="placeholders"
+    masks="masks"
+    formatting="false"
+    debug="true"
+    (ngSubmit)="sendTransfert(cardForm.value)"
+  >
+    <input type="text" name="number" card-number />
+    <input type="text" name="first-name" card-name />
+    <input type="text" name="last-name" card-name />
+    <input type="text" name="expiry" card-expiry />
+    <input type="text" name="cvc" card-cvc />
+
+    <ion-button type="submit">Send</ion-button>
+  </form>
+</ion-content>
